@@ -217,6 +217,7 @@ void AFlight::Tick(float DeltaTime)
 		Speed.Y += InertiaDecel.Y * decelDirection * DeltaTime;
 		if (decelDirection * Speed.Y > 0)
 			Speed.Y = 0.0f;
+		Speed.Y = FMath::Clamp(Speed.Y, -MaxSpeed.Y * BackSpeedMul * GetLandMul(), MaxSpeed.Y * GetLandMul());
 	}
 	else
 		bMoving.Y = false;
@@ -242,6 +243,7 @@ void AFlight::Tick(float DeltaTime)
 		Speed.X += InertiaDecel.X * decelDirection * DeltaTime;
 		if (decelDirection * Speed.X > 0)
 			Speed.X = 0.0f;
+		Speed.X = FMath::Clamp(Speed.X, -MaxSpeed.X * GetLandMul(), MaxSpeed.X * GetLandMul());
 	}
 	else
 		bMoving.X = false;
